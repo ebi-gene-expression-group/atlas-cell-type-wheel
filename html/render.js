@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import MyComponent from '../src/index.js'
+import CellTypeWheelView from '../src/index.js'
 
 const render = (options, target) => {
-  ReactDOM.render(<MyComponent {...options} />, document.getElementById(target))
+  ReactDOM.render(<CellTypeWheelView {...options} />, document.getElementById(target))
 }
 
 export {render}
