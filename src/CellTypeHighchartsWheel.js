@@ -42,6 +42,17 @@ const CellTypeHighchartsWheel= props => {
           value: 16
         }
       },
+      point: {
+        events: {
+          click: function () {
+            // To do: hyperlink to cell type heatmap with a cell type value and the corresponding species value
+            // this.options.value === 1 && alert(this.options.name)
+            // location.href = 'https://en.wikipedia.org/wiki/' +
+            //   this.options.key;
+          }
+        }
+      },
+
       levels: [{
         level: 1,
         levelIsConstant: false,
@@ -71,10 +82,10 @@ const CellTypeHighchartsWheel= props => {
       }]
 
     }],
-    tooltip: {
-      headerFormat: ``,
-      pointFormat: `The number of cell types of <b>{point.name}</b> is <b>{point.value}</b>`
-    }
+    // tooltip: {
+    //   headerFormat: ``,
+    //   pointFormat: `The number of cell types of <b>{point.name}</b> is <b>{point.value}</b>`
+    // }
   }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />
