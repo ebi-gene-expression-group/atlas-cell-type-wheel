@@ -1,77 +1,67 @@
-# Template for Gene Expression Atlas and Single Cell Expression Atlas NPM packages
+# Expression Atlas cell type wheel
 
-## Instructions
 
-***Be sure to be running npm@4.0.0 or later. At least Node.js 8 LTS is strongly recommended.***
+## JSON schema
+This repository contains a generic React component that renders grids of cards which adhere to the following JSON
+schema (defined using [JSONSchema draft-07](http://json-schema.org/specification.html)):
 
-### Clone this repository
+A demo JSON payload could be found in [gist](https://gist.githubusercontent.com/lingyun1010/88d85552d440d34ffec81b6e0eb6f469/raw/9e3033ab421dbe197ed29bbc380f30cf87263731/cellTypeWheelJsonPayload.json).
 ```
-git clone https://github.com/gxa/atlas-package my-package
-cd my-package
-rm -rf .git
-git init
-git remote add origin https://github.com/gxa/my-package.git
-```
-Remember to create the new repository. The recommendation is to prefix the package name with “atlas-”.
-
-### Fill in package metadata
-Fill in the fields `name`, `description` and `repository`. As a general rule the packages are prefixed with
-“expression-atlas-” or “sc-atlas-”. Finally, replace or remove `README.md`.
-
-## Scripts
-
-### `prepack`
-Runs the `build` script before `npm publish`. Only the `lib` directory is packaged, so make sure everything (including
-assests such as CSS or images are there).
-
-### `postversion`, `postpublish`
-After bumping the version with e.g. `npm version minor`, the package is automatically published and pushed, with all
-tags, so new versions can be published in a single step.
-
-### `test`
-`npm test` runs all phases of the test lifecycle (i.e. `pretest`, `test` and `posttest`); in case you’ve added support
-for Coveralls you won’t likely want to run the `posttest` phase. If that’s the case just do `npx jest`.
-
-## Testing
-Basic test boilerplate is included with [Jest](https://facebook.github.io/jest/) and
-[Enzyme](http://airbnb.io/enzyme/). Jest is a test runner, an assertion library and a snapshot tester, whereas Enzyme
-allows DOM testing. See the examples included in `__test__` to get an idea.
-
-### Continuous integration
-If you want CI and nice passing/failing badges, enable the repository in [Travis CI](https://travis-ci.org/). Now, with each push, Travis CI will run your tests and generate a report. You can display a test status badge going to
-Travis CI, clicking on the badge and pasting the Markdown embed snippet on your `README.md`.
-
-Enabling code coverage is very similar. You need to enable your repository in [Coveralls](https://coveralls.io/).
-Every time that Travis is run, it will generate coverage information and send it to Coveralls for a coverage report.
-If you go to Coveralls, you can also get a snippet to embed the coverage report shield on your readme file.
-
-## What’s included?
-- [React 16 and PropTypes](https://facebook.github.io/react/)
-- [URI.js](https://medialize.github.io/URI.js/) for URL manipulation (the rich version of `query-string`)
-- [Babel](https://babeljs.io/) with presets `env` and `react` (see `.babelrc`)
-- [Webpack 4 with Webpack-CLI and Webpack-Dev-Server](https://webpack.js.org/)
-- [Jest](https://facebook.github.io/jest/) and [Enzyme](http://airbnb.io/enzyme/) for testing
-
-## Polyfills
-No polyfills are included by default, but you might want one or both of these:
-- [Fetch polyfill](https://github.com/github/fetch)
-- [Babel polyfill](https://babeljs.io/docs/usage/polyfill/)
-
-### NPM
-```
-npm install --save-dev whatwg-fetch @babel/polyfill
-```
-
-Tweak your `webpack.config.js` to include them in your entry points:
-```
-entry: {
-  myComponent: [`@babel/polyfill`, `whatwg-fetch`, `./html/render.js`]
-  ...
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Wheel",
+    "required": [
+        "gene",
+        "cellTypes"
+    ],
+    "properties": {
+        "gene": {
+            "type": "string",
+            "description": "User's search value, could be gene ID or gene symbol."
+        },
+        "cellTypes": {
+            "type": "object",
+            "description": "All the cell types, in each organ, in each species based on the gene search.",
+            "$ref": "#/definitions/cellTypes"
+        }
+    },
+    "definitions": {
+        "cellTypes": {
+            "type": "object",
+            "title": "cellTypes",
+            "properties": {
+                "species": {
+                    "type": "object",
+                    "description": "Species expressed in the gene search results"
+                    "properties": {
+                        "organ": {
+                            "type": "array",
+                            "description": "Organ under an specific species"
+                            "items": {
+                                "cellType": {
+                                    "type": "string",
+                                    "description": "Cell types list under an specific organ"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
 ```
 
-## Run it on your browser
-Use Webpack-Dev-Server:
+
+## Getting started
+Install dependencies
+```
+npm install
+```
+
+Use [webpack-dev-server](https://github.com/webpack/webpack-dev-server) to see the demo page:
 ```
 npx webpack-dev-server -d
 ```

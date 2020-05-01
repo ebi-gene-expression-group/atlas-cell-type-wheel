@@ -20,12 +20,14 @@
 </body>
 
 <script src="../dist/vendors.bundle.js"></script>
-<script src="../dist/myComponent.bundle.js"></script>
-<script src="../dist/myComponentDemo.bundle.js"></script>
+<script src="../dist/cellTypeWheel.bundle.js"></script>
 
 <!-- Set to http://localhost:8080/gxa/ or http://localhost:8080/gxa_sc/ -- Remember the trailing slash! -->
 <script>
-  myComponent.render({}, 'target')
+    cellTypeWheel.render({
+        host: `https://gist.githubusercontent.com/lingyun1010/88d85552d440d34ffec81b6e0eb6f469/raw/9e3033ab421dbe197ed29bbc380f30cf87263731/cellTypeWheelJsonPayload.json`,
+        resource: ``
+    }, 'target')
 </script>
 
 </html>

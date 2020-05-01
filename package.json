@@ -1,5 +1,5 @@
 {
-  "name": "expression-atlas-my-package",
+  "name": "atlas-cell-type-wheel",
   "version": "0.0.1",
   "description": "My package does some neat things",
   "main": "lib/index.js",
@@ -28,14 +28,18 @@
   },
   "author": "Expression Atlas developers <arrayexpress-atlas@ebi.ac.uk>",
   "collaborators": [
+    "Lingyun Zhao <lingyun@ebi.ac.uk>",
     "Alfonso Muñoz-Pomer Fuentes <amunoz@ebi.ac.uk>"
   ],
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gxa/my-package.git"
+    "url": "https://github.com/ebi-gene-expression-group/atlas-cell-type-wheel"
   },
   "dependencies": {
+    "atlas-react-fetch-loader": "^1.1.1",
+    "highcharts": "^8.0.4",
+    "highcharts-react-official": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
