@@ -17,6 +17,21 @@ async function addModules() {
 
 addModules()
 
+Highcharts.SVGRenderer.prototype.symbols.download = (x, y, w, h) => [
+  // Arrow stem
+  `M`, x + w * 0.5, y,
+  `L`, x + w * 0.5, y + h * 0.7,
+  // Arrow head
+  `M`, x + w * 0.3, y + h * 0.5,
+  `L`, x + w * 0.5, y + h * 0.7,
+  `L`, x + w * 0.7, y + h * 0.5,
+  // Box
+  `M`, x, y + h * 0.9,
+  `L`, x, y + h,
+  `L`, x + w, y + h,
+  `L`, x + w, y + h * 0.9
+]
+
 // Splice in transparent for the center circle
 Highcharts.getOptions().colors.splice(0, 0, `transparent`)
 
@@ -80,12 +95,30 @@ const CellTypeHighchartsWheel= props => {
           to: 0.5
         }
       }]
-
     }],
-    // tooltip: {
-    //   headerFormat: ``,
-    //   pointFormat: `The number of cell types of <b>{point.name}</b> is <b>{point.value}</b>`
-    // }
+    exporting: {
+      buttons: {
+        contextButton: {
+          text: `Download`,
+          symbol: `download`,
+          menuItems: [
+            `printChart`,
+            `separator`,
+            `downloadPNG`,
+            `downloadJPEG`,
+            `downloadPDF`,
+            `downloadSVG`,
+            `separator`,
+            `downloadCSV`,
+            `downloadXLS`
+          ]
+        }
+      }
+    },
+    tooltip: {
+      headerFormat: ``,
+      pointFormat: `<b>{point.name}</b>`
+    }
   }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />
@@ -93,7 +126,12 @@ const CellTypeHighchartsWheel= props => {
 }
 
 CellTypeHighchartsWheel.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    parent: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.number
+  })).isRequired,
   atlasUrl: PropTypes.string
 }
 

@@ -48,7 +48,6 @@ class CellTypeWheelView extends React.Component {
     const { data } = this.state
     const { wrapperClassName, plotWrapperClassName } = this.props
 
-
     return <div className={wrapperClassName}>
       <div className={plotWrapperClassName} style={{position: `relative`}}>
         <CellTypeHighchartsWheel data={data}/>
