@@ -28,12 +28,13 @@
   },
   "author": "Expression Atlas developers <arrayexpress-atlas@ebi.ac.uk>",
   "collaborators": [
+    "Lingyun Zhao <lingyun@ebi.ac.uk>",
     "Alfonso Muñoz-Pomer Fuentes <amunoz@ebi.ac.uk>"
   ],
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gxa/my-package.git"
+    "url": "https://github.com/ebi-gene-expression-group/atlas-cell-type-wheel"
   },
   "dependencies": {
     "atlas-react-fetch-loader": "^1.1.1",
